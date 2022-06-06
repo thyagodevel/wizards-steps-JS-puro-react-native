@@ -6,52 +6,49 @@ const App = () => {
     step1: '',
     step2: '',
     step3: '',
+    stepLine1: 'blue',
+    stepLine2: 'blue'
   });
   const [colorStepper, setColorStepper] = useState(0);
 
   const colors = {
     red: 'red',
-    transparent: 'transparent'
+    transparent: 'transparent',
+    blue: 'blue'
   }
 
   const colorSteppers = (calc) => {
     if (calc === 'sum') {
       if (colorStepper === 2) {
-        setNumberStepper({step1: colors.red, step2: colors.red, step3: colors.red});
+        setNumberStepper({step1: colors.red, step2: colors.red, step3: colors.red, stepLine1: colors.red, stepLine2: colors.red});
         return;
       }
       if (colorStepper === 1) {
-        setNumberStepper({step1: colors.red, step2: colors.red, step3: colors.transparent});
+        setNumberStepper({step1: colors.red, step2: colors.red, step3: colors.transparent, stepLine1: colors.red, stepLine2: colors.blue});
         return;
       }
       if (colorStepper === 0) {
-        setNumberStepper({step1: colors.red, step2: colors.transparent, step3: colors.transparent});
+        setNumberStepper({step1: colors.red, step2: colors.transparent, step3: colors.transparent, stepLine1: colors.blue, stepLine2: colors.blue});
         return;
       }
       return;
     }
     if (calc === 'sub') {
       if (colorStepper === 3) {
-        setNumberStepper({step1: 'red', step2: 'red', step3: 'transparent'});
+        setNumberStepper({step1: colors.red, step2: colors.red, step3: colors.transparent, stepLine1: colors.red, stepLine2: colors.blue});
         return;
       }
       if (colorStepper === 2) {
-        setNumberStepper({step1: 'red', step2: 'transparent', step3: 'transparent'});
+        setNumberStepper({step1: colors.red, step2: colors.transparent, step3: colors.transparent, stepLine1: colors.blue, stepLine2: colors.blue});
         return;
       }
       if (colorStepper === 1) {
-        setNumberStepper({step1: 'transparent', step2: 'transparent', step3: 'transparent'});
+        setNumberStepper({step1: colors.transparent, step2: colors.transparent, step3: colors.transparent, stepLine1: colors.blue, stepLine2: colors.blue});
         return;
       }
       return;
     }
-    
-    
   }
-
-  
-
-  
   
   //console.log(backgroundColorStepper);
 
@@ -66,13 +63,13 @@ const App = () => {
             <Text>1</Text>
           </View>
           <View style={styles.containerWizardsLine}>
-            <View style={[styles.wizardLine, {}]}></View>
+            <View style={[styles.wizardLine, {backgroundColor: numberStepper.stepLine1}]}></View>
           </View>
           <View style={[styles.containerWizardsNumbers, {backgroundColor: numberStepper.step2}]}>
             <Text>2</Text>
           </View>
           <View style={styles.containerWizardsLine}>
-            <View style={[styles.wizardLine, {}]}></View>
+            <View style={[styles.wizardLine, {backgroundColor: numberStepper.stepLine2}]}></View>
           </View>
           <View style={[styles.containerWizardsNumbers, {backgroundColor: numberStepper.step3}]}>
             <Text>3</Text>
@@ -128,6 +125,6 @@ const styles = StyleSheet.create({
   wizardLine: {
     height: 2,
     width: 50,
-    backgroundColor: 'blue',
+    //backgroundColor: 'blue',
   },
 });
