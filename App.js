@@ -1,130 +1,35 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import Steps from './src/components/Steps';
 
 const App = () => {
-  const [numberStepper, setNumberStepper] = useState({
-    step1: '',
-    step2: '',
-    step3: '',
-    stepLine1: 'blue',
-    stepLine2: 'blue'
-  });
-  const [colorStepper, setColorStepper] = useState(0);
-
-  const colors = {
-    red: 'red',
-    transparent: 'transparent',
-    blue: 'blue'
-  }
-
-  const colorSteppers = (calc) => {
-    if (calc === 'sum') {
-      if (colorStepper === 2) {
-        setNumberStepper({step1: colors.red, step2: colors.red, step3: colors.red, stepLine1: colors.red, stepLine2: colors.red});
-        return;
-      }
-      if (colorStepper === 1) {
-        setNumberStepper({step1: colors.red, step2: colors.red, step3: colors.transparent, stepLine1: colors.red, stepLine2: colors.blue});
-        return;
-      }
-      if (colorStepper === 0) {
-        setNumberStepper({step1: colors.red, step2: colors.transparent, step3: colors.transparent, stepLine1: colors.blue, stepLine2: colors.blue});
-        return;
-      }
-      return;
-    }
-    if (calc === 'sub') {
-      if (colorStepper === 3) {
-        setNumberStepper({step1: colors.red, step2: colors.red, step3: colors.transparent, stepLine1: colors.red, stepLine2: colors.blue});
-        return;
-      }
-      if (colorStepper === 2) {
-        setNumberStepper({step1: colors.red, step2: colors.transparent, step3: colors.transparent, stepLine1: colors.blue, stepLine2: colors.blue});
-        return;
-      }
-      if (colorStepper === 1) {
-        setNumberStepper({step1: colors.transparent, step2: colors.transparent, step3: colors.transparent, stepLine1: colors.blue, stepLine2: colors.blue});
-        return;
-      }
-      return;
-    }
-  }
-  
-  //console.log(backgroundColorStepper);
+  let windowDimensionsWidth = Dimensions.get('window').width;
+  let windowDimensionsHeight = Dimensions.get('window').height;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.containerWizards}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View
-            style={[styles.containerWizardsNumbers, {backgroundColor: numberStepper.step1}]}
-
+    <Steps>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <ScrollView
+            horizontal={true}
+            pagingEnabled={true}
           >
-            <Text>1</Text>
-          </View>
-          <View style={styles.containerWizardsLine}>
-            <View style={[styles.wizardLine, {backgroundColor: numberStepper.stepLine1}]}></View>
-          </View>
-          <View style={[styles.containerWizardsNumbers, {backgroundColor: numberStepper.step2}]}>
-            <Text>2</Text>
-          </View>
-          <View style={styles.containerWizardsLine}>
-            <View style={[styles.wizardLine, {backgroundColor: numberStepper.stepLine2}]}></View>
-          </View>
-          <View style={[styles.containerWizardsNumbers, {backgroundColor: numberStepper.step3}]}>
-            <Text>3</Text>
-          </View>
-        </ScrollView>
-        </View>
-        <View style={{flex: 1, justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row'}}>
-          <TouchableOpacity onPress={() => {
-            colorSteppers('sub');
-            colorStepper >= 1 ? setColorStepper(colorStepper - 1) : undefined;
-          }}>
-            <Text>Anterior</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {
-            colorSteppers('sum');
-            colorStepper <= 2 ? setColorStepper(colorStepper + 1) : undefined;
-          }}>
-            <Text>Próximo</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text>{colorStepper}</Text>
-          </TouchableOpacity>
-        </View>
-    </SafeAreaView>
+            <View style={{flex: 1, width: windowDimensionsWidth, justifyContent: 'center', alignItems: 'center'}}>
+              <Text>tela 1</Text>
+            </View>
+            <View style={{flex: 1, width: windowDimensionsWidth, justifyContent: 'center', alignItems: 'center'}}>
+              <Text>tela 2</Text>
+            </View>
+            <View style={{flex: 1, width: windowDimensionsWidth, justifyContent: 'center', alignItems: 'center'}}>
+              <Text>tela 3</Text>
+            </View>
+          </ScrollView>
+      </View>
+    </Steps>
   )
 }
 
 export default App;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    //justifyContent: 'space-between',
-    margin: 20,
-  },
-  containerWizards: {
-    height: 30,
-    //backgroundColor: 'red',
-    flexDirection: 'row',
-  },
-  containerWizardsNumbers: {
-    borderWidth: 2,
-    borderColor: 'blue',
-    borderRadius: 15,
-    height: 30,
-    width: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  containerWizardsLine: {
-    justifyContent: 'center'
-  },
-  wizardLine: {
-    height: 2,
-    width: 50,
-    //backgroundColor: 'blue',
-  },
+  
 });
